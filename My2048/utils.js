@@ -37,9 +37,9 @@ function getNumByRowColumn(row, column){
 	return getNumberById(id);
 }
 
-function setNumByRowColumn(row, column){
+function setNumByRowColumn(row, column, num){
 	var id = getIdByRowColumn(row, column);
-	setNumberByID(id);
+	setNumberByID(id, num);
 }
 
 function getIdByRowColumn(row, column){
@@ -52,4 +52,8 @@ function getRandomNum(min, max){
 	var random = Math.random();
 	var num = min + Math.round(random * range);
 	return num;
+}
+
+function move(row, column){
+
 }

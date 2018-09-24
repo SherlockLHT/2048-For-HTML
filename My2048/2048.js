@@ -53,6 +53,13 @@ function moveLeft(){
 
 function moveLeftRow(row){
 	for(var column = 1; column < 3; column++){
-		
+		var current = getNumByRowColumn(row, column);
+		if(0 == current){//当前是0，则停止
+			continue;
+		}
+		var pervious = getNumByRowColumn(row, column);
+		if(current == pervious){//当前和前一个相同，则赋值并移动
+			setNumByRowColumn();
+		}
 	}
 }
