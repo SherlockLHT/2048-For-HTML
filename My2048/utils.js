@@ -1,26 +1,16 @@
-var allId = new Array(4, 4);
-allId[0][0] = "cell-0-0";
-allId[0][1] = "cell-0-1";
-allId[0][2] = "cell-0-2";
-allId[0][3] = "cell-0-3";
-allId[1][0] = "cell-1-0";
-allId[1][1] = "cell-1-1";
-allId[1][2] = "cell-1-2";
-allId[1][3] = "cell-1-3";
-allId[2][0] = "cell-2-0";
-allId[2][1] = "cell-2-1";
-allId[2][2] = "cell-2-2";
-allId[2][3] = "cell-2-3";
-allId[3][0] = "cell-3-0";
-allId[3][1] = "cell-3-1";
-allId[3][2] = "cell-3-2";
-allId[3][3] = "cell-3-3";
-
+var allId = new Array();	//所有id
+for(var row = 0; row < 4; row++){
+	allId[row] = new Array();
+	for(var column = 0; column < 4; column++){
+		var id = "cell-" + row + "-" + column;
+		allId[row][column] = id;
+	}
+}
 
 function setNumberByID(id, number){
 	var element = document.getElementById(id);
 	element.innerHTML = number
-	element.innerHTML = 0==number? "": number;
+	//element.innerHTML = 0==number? "": number;
 }
 
 function getNumberById(id){
@@ -54,6 +44,72 @@ function getRandomNum(min, max){
 	return num;
 }
 
-function move(row, column){
+function move(row, column, toRow, toColumn){
+	var from_id = allId[row][column];
+	var to_pos_x = getPosLeft(toRow, toColumn);
+	var to_pos_y = getPosTop(toRow, toColumn);
+	$("#" + from_id).animate({top: to_pos_y, left:to_pos_x}, 0);
+	moveAtOnce(toRow, toColumn, row, column);
+}
 
+function moveAtOnce(row, column, toRow, toColumn){
+	var from_id = allId[row][column];
+	var to_pos_x = getPosLeft(toRow, toColumn);
+	var to_pos_y = getPosTop(toRow, toColumn);
+	//$("#" + from_id).animate({height:'200px'}, 1000);
+	//$("#" + from_id).css("height:200px;");
+	$("#" + from_id).css({top: to_pos_y, left:to_pos_x});
+	//$("#" + from_id).css("style.top:"+to_pos_y + ";style.left:"+to_pos_x);
+}
+
+function getPosLeft(row, column){
+	return 130*column+30;
+}
+function getPosTop(row, column){
+	return 130*row+30
+}
+
+function getNumberBackgroundColor(number) {
+    switch (number) {
+    case 2:
+        return "#eee4da";
+        break;
+    case 4:
+        return "#eee4da";
+        break;
+    case 8:
+        return "#f26179";
+        break;
+    case 16:
+        return "#f59563";
+        break;
+    case 32:
+        return "#f67c5f";
+        break;
+    case 64:
+        return "#f65e36";
+        break;
+    case 128:
+        return "#edcf72";
+        break;
+    case 256:
+        return "#edcc61";
+        break;
+    case 512:
+        return "#9c0";
+        break;
+    case 1024:
+        return "#3365a5";
+        break;
+    case 2048:
+        return "#09c";
+        break;
+    case 4096:
+        return "#a6bc";
+        break;
+    case 8192:
+        return "#93c";
+        break;
+    }
+    return "black";
 }
